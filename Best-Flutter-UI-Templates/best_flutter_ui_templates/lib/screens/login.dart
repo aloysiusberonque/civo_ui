@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:best_flutter_ui_templates/screens/input_prompt.dart';
 import 'package:best_flutter_ui_templates/widgets/q_button.dart';
 import 'package:best_flutter_ui_templates/widgets/q_button_outline.dart';
 import 'package:best_flutter_ui_templates/widgets/q_text_field.dart';
@@ -121,8 +122,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               login(usernameController.text,
                                       passwordController.text)
                                   .then((response) {
-                                // Navigator.pushNamed(context, '/home');
-                                print('login');
+                                 Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => InputPrompt()));
                               });
                             }
                           }),
