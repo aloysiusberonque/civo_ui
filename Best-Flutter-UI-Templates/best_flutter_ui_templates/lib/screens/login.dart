@@ -38,16 +38,17 @@ class _LoginScreenState extends State<LoginScreen> {
     //   },
     // );
     final response =
-        await http.post(Uri.parse('http://10.0.2.2:8000/token/obtain/'),
+        await http.post(Uri.parse('http://192.168.43.95:8000/token/obtain/'),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
             body: jsonEncode(<String, dynamic>{
-              'email': username,
+              'username': username,
               'password': password,
             }));
     if (response.statusCode == 200) {
       //nav to next screen
+      print('henlo');
     } else if (response.statusCode == 401) {
       // dialogContext.pop();
       // showQToast("Invalid username or password", true);
@@ -99,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.only(
                           left: 20.0, top: 12.0, right: 20.0),
                       child: QTextField(
-                        label: "Email Address",
+                        label: "Username",
                         textController: usernameController,
                       ),
                     ),
@@ -117,8 +118,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: QButton(
                           label: "Login",
                           onPress: () {
-                            Navigator.of(context).push(MaterialPageRoute(
+                            if (verifyLogin()) {
+                              login(usernameController.text,
+                                      passwordController.text)
+                                  .then((response) {
+                                 Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => InputPrompt()));
+                              });
+                            }
                           }),
                     ),
                     Spacer(flex: 1),
