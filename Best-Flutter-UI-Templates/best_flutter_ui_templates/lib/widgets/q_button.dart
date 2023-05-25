@@ -21,7 +21,7 @@ class _QButtonState extends State<QButton> {
           crossAxisAlignment: WrapCrossAlignment.center,
           spacing: 8.0,
           children: [
-            widget.icon ?? const SizedBox(),
+            widget.icon ?? SizedBox(width: 1),
             Text(
               style:
                   Theme.of(context).textTheme.bodyLarge?.merge(const TextStyle(
@@ -30,6 +30,7 @@ class _QButtonState extends State<QButton> {
                       )),
               widget.label,
             ),
+            widget.icon ?? SizedBox(width: 1),
           ],
         ));
   }

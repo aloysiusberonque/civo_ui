@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:best_flutter_ui_templates/screens/input_prompt.dart';
 import 'package:best_flutter_ui_templates/widgets/q_button.dart';
 import 'package:best_flutter_ui_templates/widgets/q_button_outline.dart';
 import 'package:best_flutter_ui_templates/widgets/q_text_field.dart';
@@ -113,7 +114,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 20.0, top: 20.0, right: 20.0, bottom: 20.0),
-                      child: QButton(label: "Login", onPress: () {}),
+                      child: QButton(
+                          label: "Login",
+                          onPress: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => InputPrompt()));
+                          }),
                     ),
                     Spacer(flex: 1),
                   ],
