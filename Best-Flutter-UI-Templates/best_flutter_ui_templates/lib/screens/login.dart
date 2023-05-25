@@ -99,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       padding: const EdgeInsets.only(
                           left: 20.0, top: 12.0, right: 20.0),
                       child: QTextField(
-                        label: "Email Address",
+                        label: "Username",
                         textController: usernameController,
                       ),
                     ),
