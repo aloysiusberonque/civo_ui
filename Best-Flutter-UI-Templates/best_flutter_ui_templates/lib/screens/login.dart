@@ -24,43 +24,37 @@ class _LoginScreenState extends State<LoginScreen> {
     return true;
   }
 
-  // Future<Token> login(String username, String password) async {
-  //   late NavigatorState dialogContext;
-  //   showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder: (BuildContext context) {
-  //       dialogContext = Navigator.of(context);
-  //       return const Center(
-  //         child: CircularProgressIndicator(),
-  //       );
-  //     },
-  //   );
-  //   final response = await http.post(Uri.parse('${Env.URL_PREFIX}/api/token/'),
-  //       headers: <String, String>{
-  //         'Content-Type': 'application/json; charset=UTF-8',
-  //       },
-  //       body: jsonEncode(<String, dynamic>{
-  //         'username': username,
-  //         'password': password,
-  //       }));
-  //   if (response.statusCode == 200) {
-  //     final tokenJson = jsonDecode(response.body);
-  //     //set current user to username and store globally
-  //     localDetails = await getUser(username);
-  //     quizzes = await getUserQuizzes();
-  //     // print(localDetails.toString());
-  //     return Token.fromJson(tokenJson);
-  //   } else if (response.statusCode == 401) {
-  //     dialogContext.pop();
-  //     showQToast("Invalid username or password", true);
-  //     throw Exception('Invalid login.');
-  //   } else {
-  //     dialogContext.pop();
-  //     showQToast("Something wrong happened. Please try again later.", true);
-  //     throw Exception('Something wrong happened. Please try again later.');
-  //   }
-  // }
+  Future<void> login(String username, String password) async {
+    // late NavigatorState dialogContext;
+    // showDialog(
+    //   context: context,
+    //   barrierDismissible: false,
+    //   builder: (BuildContext context) {
+    //     dialogContext = Navigator.of(context);
+    //     return const Center(
+    //       child: CircularProgressIndicator(),
+    //     );
+    //   },
+    // );
+    final response =
+        await http.post(Uri.parse('http://10.0.2.2:8000/token/obtain/'),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(<String, dynamic>{
+              'email': username,
+              'password': password,
+            }));
+    if (response.statusCode == 200) {
+      //nav to next screen
+    } else if (response.statusCode == 401) {
+      // dialogContext.pop();
+      // showQToast("Invalid username or password", true);
+      throw Exception('Invalid login.');
+    } else {
+      throw Exception('Something wrong happened. Please try again later.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
