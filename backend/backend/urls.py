@@ -16,19 +16,20 @@ Including another URLconf
 from django.urls import path
 from rest_framework import routers
 from django.urls import include, path
-from fireyhire.views import ResumeViewSet
+from fireyhire.views import ResumeViewSet, UserViewSet
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from fireyhire.views import EmailTokenObtainPairView
 
 router = routers.DefaultRouter()
 router.register(r'resumes', ResumeViewSet)
-# router.register(r'resumes', ResumeViewSet)
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/obtain/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
